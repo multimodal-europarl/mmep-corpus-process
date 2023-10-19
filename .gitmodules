@@ -4,3 +4,4 @@
 [submodule "mmep-corpus"]
 	path = mmep-corpus
 	url = git@github.com:multimodal-europarl/mmep-corpus.git
+	update = merge
