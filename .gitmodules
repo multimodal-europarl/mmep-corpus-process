@@ -1,0 +1,3 @@
+[submodule "pymmep"]
+	path = pymmep
+	url = git@github.com:multimodal-europarl/pymmep.git
