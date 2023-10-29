@@ -9,6 +9,7 @@ from pymmep.eaf_utils import (
         write_eaf,
         xml_formatted_uuid,
     )
+from tqdm import tqdm
 from lxml import etree
 import argparse
 
@@ -21,10 +22,10 @@ def update_annotation_ids(eaf):
     UUIDS = set()
     num_ids = 0
     for tier in tiers:
-        print(tier, tier.tag, tier.attrib.get("TIER_ID"), xml_formatted_uuid())
+        #print(tier, tier.tag, tier.attrib.get("TIER_ID"), xml_formatted_uuid())
         for annotation in tier:
             ID = annotation[0].attrib.get("ANNOTATION_ID")
-            print(ID)
+        #    print(ID)
             if ID.startswith("a"):
                 new_id = xml_formatted_uuid()
                 D[ID] = new_id
@@ -45,16 +46,11 @@ def update_annotation_ids(eaf):
 
 
 def main(args):
-    eaf_paths = sorted(list(eaf_iterator(
-            tx_dir="mmep-corpus/transcribed-audio",
-            start=args.start, end=args.end
-        )))
+    eaf_paths = sorted(list(eaf_iterator(tx_dir="mmep-corpus/transcribed-audio", start=args.start, end=args.end)))
 
-    count = 0
-    for ep in eaf_paths:
-        print(ep)
+    for ep in tqdm(eaf_paths, total=len(eaf_paths)):
         eaf = parse_eaf(ep)
-        update_annotation_ids(eaf) #write this
+        write_eaf(update_annotation_ids(eaf), ep)
 
 
 
