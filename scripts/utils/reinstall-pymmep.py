@@ -7,7 +7,7 @@ Reinstall pymmep to the working virtual environment.
 NB, this will take pymmep from whatever branch of the pymmep
 repo that's currently checked out locally.
 """
-import argparse, shutil
+import argparse, os, shutil
 
 
 
@@ -18,6 +18,8 @@ def main(args):
         ]
     src = "pymmep"
     dest = f"{args.env_path}lib/python{args.python_version}/site-packages/pymmep/"
+    if os.path.isdir(dest):
+        shutil.rmtree(dest)
     shutil.copytree(src, dest,
                     ignore = shutil.ignore_patterns(*ignore),
                     dirs_exist_ok = True
