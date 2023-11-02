@@ -1,3 +1,5 @@
+Short description: Utilities for working with git diffs, in combination with the sample-git-diffs module.
+
 # Diff sampling
 
 When we make changes to data, we take a sample of edits to check whether they in fact do what we intend. This is accomplished by taking a random sample of the diffs and posting for quality controll before commiting and pushing changes with many edits to the repo.
