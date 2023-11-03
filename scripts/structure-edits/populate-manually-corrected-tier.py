@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Popoulate <TIER TIER_ID="*_manually_corrected"> with REF_ANNOTATIONS.
+Popoulate \<TIER TIER_ID="*_manually_corrected"> with REF_ANNOTATIONS.
 """
 from pymmep.eaf_utils import (
         eaf_iterator,

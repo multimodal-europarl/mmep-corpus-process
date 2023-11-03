@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Chamge <TIER TIER_ID="*_corrected_by">
+Chamge \<TIER TIER_ID="*_corrected_by">
 
-to: <TIER TIER_ID="*_manually_corrected">
+to: \<TIER TIER_ID="*_manually_corrected">
 """
 from pymmep.eaf_utils import (
         eaf_iterator,

@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """
-Search for something in a git diff. Return N instances and total diff lines. search is simple substr in str type
+Search for something in a git diff.
+
+- Return N instances and total diff lines.
+- Write search results to a file
+
+Search is simple substr in str OR regex search.
+
 """
 import argparse, re
 
@@ -8,6 +14,13 @@ import argparse, re
 
 
 def ck_line(line, req, q):
+    """
+    Apply query to line.
+
+    - `line`: line
+    - `req`: is regex query (bool)
+    - `q`: query
+    """
     if req:
         #print(fr"{q}")
         if re.search(fr"{q}", line):
@@ -21,6 +34,13 @@ def ck_line(line, req, q):
 
 
 def write_hits(hit_list, lines, outf):
+    """
+    Write seratch results to file.
+
+    - `hits_list`: line indexes
+    - `lines`: list of lines from diff file
+    - `outf`: outfile path
+    """
     to_write = []
     write_next = False
     for i, l in enumerate(lines):
@@ -42,6 +62,41 @@ def write_hits(hit_list, lines, outf):
 
 
 def main(args):
+    """
+Iterate through diff and query changes to/from.
+```
+usage:
+diff-search.py [-h] -d DIFF_FILE [-s SEARCH_FROM] [-S SEARCH_TO]
+               [-b SEARCH_BOTH] [-r] [-p] [-o OUT_FILE]
+
+Search for something in a git diff.
+
+- Return N instances and total diff lines.
+- Write search results to a file
+
+Search is simple substr in str OR regex search.
+
+
+options:
+  -h, --help            show this help message and exit
+  -d DIFF_FILE, --diff-file DIFF_FILE
+                        Path to .diff file.
+  -s SEARCH_FROM, --search-from SEARCH_FROM
+                        Substring to search for in the change from line (`-`).
+                        If given together with `-S | --search-to`,results are
+                        given when matches are found in both lines.
+  -S SEARCH_TO, --search-to SEARCH_TO
+                        Substring to searhc for in the change to line (`+`).
+  -b SEARCH_BOTH, --search-both SEARCH_BOTH
+                        Seach the same substring and `+` and `-` lines.
+                        Equivalent of setting the `-s` and `-S` args with the
+                        same input.
+  -r, --regex           Treat search strings as literal in regex queries.
+  -p, --print-hit       Print match results to console.
+  -o OUT_FILE, --out-file OUT_FILE
+                        Write matched diffs to the given output file.
+    ```
+    """
     changes = 0
     counter = 0
     hit_indexes = []
@@ -89,7 +144,7 @@ def main(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("-d","--diff-file", required=True, help="Path to .diff file.")
     parser.add_argument("-s", "--search-from", type=str, default=None,
         help="Substring to search for in the change from line (`-`). If given together with `-S | --search-to`, results are given when matches are found in both lines."
