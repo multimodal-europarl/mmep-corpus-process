@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Chamge <LINGUISTIC_TYPE LINFUISTIC_TYPE_ID="corrected_by">
+Chamge \<LINGUISTIC_TYPE LINFUISTIC_TYPE_ID="corrected_by">
 
-to: <LINGUISTIC_TYPE LINFUISTIC_TYPE_ID="Transcription_Dependent">
+to: \<LINGUISTIC_TYPE LINFUISTIC_TYPE_ID="Transcription_Dependent">
 """
 from pymmep.eaf_utils import (
         eaf_iterator,

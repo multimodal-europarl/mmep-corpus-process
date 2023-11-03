@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Change non-unique elan-generated ids to formatted uuids.
+Change non-unique elan-generated ids to formatted uuids. Run any time Annotations are added or split in Elan.
 """
 from pymmep.eaf_utils import (
         eaf_iterator,
@@ -17,6 +17,9 @@ import argparse
 
 
 def update_annotation_ids(eaf):
+    """
+    Check all annotation IDs. If assigned by elan, replace.
+    """
     tiers = get_tiers(eaf)
     D = {}
     UUIDS = set()
@@ -46,6 +49,22 @@ def update_annotation_ids(eaf):
 
 
 def main(args):
+    """
+Iterate over all eaf files, parse, and update_annotation_ids()
+```
+usage:
+update-annotation-ids.py [-h] [-s START] [-e END]
+
+Change non-unique elan-generated ids to formatted uuids.
+Run any time Annotations are added or split in Elan.
+
+options:
+  -h, --help            show this help message and exit
+  -s START, --start START
+                        Start: YYYYMM
+  -e END, --end END     End: YYYYMM
+    ```
+    """
     eaf_paths = sorted(list(eaf_iterator(tx_dir="mmep-corpus/transcribed-audio", start=args.start, end=args.end)))
 
     for ep in tqdm(eaf_paths, total=len(eaf_paths)):

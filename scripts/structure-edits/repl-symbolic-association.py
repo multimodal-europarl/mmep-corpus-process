@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Chamge <LINGUISTIC_TYPE CONSTRAINTS="Symbolic Association">
+Chamge \<LINGUISTIC_TYPE CONSTRAINTS="Symbolic Association">
 
-to: <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association">
+to: \<LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association">
 """
 from pymmep.eaf_utils import (
         eaf_iterator,
