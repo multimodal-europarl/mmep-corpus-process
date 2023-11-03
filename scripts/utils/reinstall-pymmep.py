@@ -3,7 +3,7 @@
 Reinstall pymmep to the working virtual environment.
 
 (This is depreciated after release of pymmep on PyPI,
-but potentially still usefull during development)
+but potentially still usefull during development.)
 
 NB, this will take pymmep from whatever branch of the pymmep
 repo that's currently checked out locally.
