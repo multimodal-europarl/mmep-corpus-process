@@ -6,6 +6,7 @@ The eaf docs were generated with a different xml library, so in order to avoid g
 """
 from pymmep.eaf_utils import (
         eaf_iterator,
+        get_tiers,
         parse_eaf,
         write_eaf,
     )
@@ -13,12 +14,31 @@ from tqdm import tqdm
 from lxml import etree
 import argparse
 
+
+
+
+def set_empty_tier_text_to_none(ep):
+    """
+    If a tier element contains only whitespace, set elem.text to None.
+    When etree can't decide if whitespace is meaningful, pretty print doesn't work,
+    """
+    eaf = parse_eaf(ep)
+    tiers = get_tiers(eaf)
+    for tier in tiers:
+        if len(tier.text.strip()) == 0:
+            tier.text = None
+    return eaf
+
+
+
+
 def main(args):
     eaf_paths = sorted(list(eaf_iterator(tx_dir="mmep-corpus/transcribed-audio", start=args.start, end=args.end)))
-
     for ep in tqdm(eaf_paths, total=len(eaf_paths)):
-        eaf = parse_eaf(ep)
-        write_eaf(eaf, ep)
+        write_eaf(set_empty_tier_text_to_none(ep), ep)
+
+
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = __doc__)
