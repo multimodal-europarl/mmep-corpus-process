@@ -77,6 +77,6 @@ options:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = __doc__)
     parser.add_argument("-s", "--start", type=int, default=200809, help="Start: YYYYMM")
-    parser.add_argument("-e", "--end", type=int, default=200912, help="End: YYYYMM")
+    parser.add_argument("-e", "--end", type=int, default=201005, help="End: YYYYMM")
     args = parser.parse_args()
     main(args)
